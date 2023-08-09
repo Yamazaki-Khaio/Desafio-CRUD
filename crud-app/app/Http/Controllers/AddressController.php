@@ -23,11 +23,11 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'cep' => 'required',
-            'logradouro' => 'required',
-            'bairro' => 'required',
-            'cidade' => 'required',
-            'uf' => 'required',
+            'CEP' => 'required',
+            'Logradouro' => 'required',
+            'Bairro' => 'required',
+            'Cidade' => 'required',
+            'UF' => 'required',
         ]);
 
         $address = Address::create($data);
@@ -46,7 +46,7 @@ class AddressController extends Controller
             'CEP' => 'required',
             'Logradouro' => 'required',
             'Bairro' => 'required',
-            'cidade' => 'required',
+            'Cidade' => 'required',
             'UF' => 'required',
         ]);
 
@@ -66,16 +66,4 @@ class AddressController extends Controller
         return response()->json(['message' => 'Endereço removido com sucesso'], 200);
     }
 
-    public function search(Request $request)
-    {
-        $data = $request->validate([
-            'CEP' => 'required',
-            'Logradouro' => 'required',
-            'Bairro' => 'required',
-            'Cidade' => 'required',
-            'UF' => 'required',
-        ]);
-    
-        $address = Address::create($data);
-        return response()->json($address, 201);    }
 }
