@@ -9,6 +9,8 @@ class Address extends Model
 {
     protected $table = 'table_address';
     protected $primaryKey = 'id';
-    protected $fillable = ['CEP', 'Longadouro', 'Bairro', 'Cidade', 'UF'];
+    public $timestamps = false;
+
+    protected $fillable = ['CEP', 'Logradouro', 'Bairro', 'Cidade', 'UF'];
     use HasFactory;
 }
