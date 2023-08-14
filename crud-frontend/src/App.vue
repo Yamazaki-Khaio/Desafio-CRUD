@@ -186,7 +186,7 @@ export default {
       console.log('Searching and saving for', this.searchQuery);
       try {
         // Perform Google API search here using this.inputValue
-        const googleResponse = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.searchQuery}&key=AIzaSyAMgyQfa8YPpotoHm0HH3bI9z75oNql75w`);
+        const googleResponse = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.searchQuery}&key=API_KEY`);
         console.log(googleResponse.data);
         if (googleResponse.data.status === 'OK') {
           const googleResult = googleResponse.data.results[0];
