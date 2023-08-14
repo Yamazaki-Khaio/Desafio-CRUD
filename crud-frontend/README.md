@@ -1,6 +1,6 @@
-# desafio-crud
+# crud-frontend
 
-> crud for search address
+> A Vue.js project
 
 ## Build Setup
 

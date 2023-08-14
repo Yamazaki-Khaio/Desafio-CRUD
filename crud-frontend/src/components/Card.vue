@@ -1,106 +1,155 @@
 <template>
-  <v-card class="mx-auto" max-width="280" outlined>
-    <v-card-item class="card-item">
-      <div class="card-content">
-        <div class="text-overline mb-1">{{ address.cep }}</div>
-        <div class="text-h6 mb-1">{{ address.logradouro }}</div>
-        <div class="text-caption">
-          <p><strong>Bairro:</strong> {{ address.bairro }}</p>
-          <p><strong>Cidade:</strong> {{ address.cidade }}</p>
-          <p><strong>UF:</strong> {{ address.uf }}</p>
-        </div>
-      </div>
-      <v-card-actions class="card-actions">
-        <v-btn outlined color="primary" class="btn-edit">Editar</v-btn>
-        <v-btn outlined color="error" class="btn-delete">Deletar</v-btn>
-      </v-card-actions>
-    </v-card-item>
-  </v-card>
+  <div class="card">
+    <h3 class="card-title">CEP: {{ address.CEP }}</h3>
+    <p class="card-text">Logradouro: {{ address.Logradouro }}</p>
+    <p class="card-text">Bairro: {{ address.Bairro }}</p>
+    <p class="card-text">Cidade: {{ address.Cidade }}</p>
+    <p class="card-text">UF: {{ address.UF }}</p>
+    <div class="button-container">
+      <button class="card-button edit-button" @click="editAddress">Edit</button>
+      <button class="card-button remove-button" @click="removeAddress">Remove</button>
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  data() {
-    return {
-      address: {
-        cep: "",
-        logradouro: "",
-        bairro: "",
-        cidade: "",
-        uf: "",
-      },
-    };
+  props: {
+    address: Object
   },
   methods: {
-    async fetchData() {
-      try {
-        const response = await axios.get("http://localhost:8000/api/");
-        if (response.data.length > 0) {
-          this.address = response.data[0];
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    editAddress() {
+      this.$emit('edit', this.address.id);
     },
-  },
-  created() {
-    this.fetchData();
-  },
+    removeAddress() {
+      this.$emit('remove', this.address.id);
+    }
+  }
 };
 </script>
 
 <style scoped>
-.card-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f5f5f5;
+.card {
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #ced4da);
+  width: calc(33.33% - 20px);
+  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 12px;
-  transition: background-color 0.3s;
-}
-
-.card-item:hover {
-  background-color: #e0e0e0;
-}
-
-.card-content {
-  flex: 1;
-}
-
-.card-actions {
-  flex-shrink: 0;
-  display: flex;
+  padding: 15px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
   flex-direction: column;
+  display: flex;
+  margin-bottom: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.btn-edit,
-.btn-delete {
-  font-weight: 600;
-  text-transform: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  margin-top: 8px;
-}
-
-.btn-edit {
-  color: #2196f3;
-  border-color: #2196f3;
-}
-
-.btn-delete {
-  color: #f44336;
-  border-color: #f44336;
-}
-
-.text-overline,
-.text-h6,
-.text-caption {
+.card-title {
   margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-/* Your other styles */
+.card-text {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.card-button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+  text-transform: uppercase;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.remove-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.card-button:hover {
+  opacity: 0.8;
+}
+
+/* Responsividade */
+@media (max-width: 1366px) {
+  .card {
+    padding: 15px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .card-button {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .card {
+    padding: 30px;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .card-text {
+    font-size: 1.2rem;
+  }
+
+  .card-button {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 414px) {
+  .card {
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+
+  .card-button {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}
 </style>

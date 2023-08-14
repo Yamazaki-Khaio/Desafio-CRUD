@@ -1,7 +1,7 @@
 {
-  "name": "desafio-crud",
+  "name": "crud-frontend",
   "version": "1.0.0",
-  "description": "crud for search address",
+  "description": "A Vue.js project",
   "author": "Yamazaki-Khaio <kfonseca@ecomp.uefs.br>",
   "private": true,
   "scripts": {
